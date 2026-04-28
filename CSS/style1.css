@@ -1,0 +1,359 @@
+:root {
+    --bg-color: #88767603;
+    --card-bg: #d2c0c0;
+    --accent-color:  red  ; /* Euclid Red */
+    --safe-color: #4caf50;   /* Safe Green */
+    --text-color: #120808;
+    --nav-bg: rgba(13, 15, 4, 0.9);
+    --border: 0, 0, 0; /* For hsl(var(--border)) */
+    --animation: alternate 1s infinite;
+}
+
+body {
+    background-color:rgb(94, 130, 105);
+    color: var(--text-color);
+    font-family: 'Courier New', Courier, monospace;
+    margin: 0;
+    padding-top: 80px;
+    line-height:1.6;
+
+}
+.search-bar {
+  width: 100%;
+  padding: 0.7rem;
+  margin-top: 1rem;
+  border-radius: 6px;
+  border: 1px solid hsl(var(--border));
+  background: hsl(var(--card));
+  color: white;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.scp-card {
+  background: hsl(var(--card));
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid hsl(var(--border));
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.scp-card img {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+
+}
+
+.scp-card h2 {
+  padding: 0.5rem 1rem;
+}
+
+.scp-card p {
+  padding: 0 1rem 1rem;
+  font-size: 0.9rem;
+}
+
+.scp-card:hover {
+  transform: translateY(-10px) scale(1.03);
+  box-shadow: 0 0 20px rgba(255,0,0,0.6);
+}
+
+/* Glow border animation */
+.scp-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  transition: 0.3s;
+}
+
+.scp-card:hover::after {
+  border-color: red;
+  box-shadow: 0 0 15px red;
+}
+
+
+/* Navbar Style */
+.navbar {
+    position: fixed;
+    top: 0;
+    right: 10px;
+    left: 5px;
+    width: 90%;
+    background: var(--nav-bg);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 50px;
+    border-bottom: 2px solid #333;
+    z-index: 1000;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    letter-spacing: 3px;
+    color: var(--accent-color);
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: white;
+    font-size: 0.9rem;
+    transition: 0.3s;
+    text-transform: uppercase;
+}
+
+.nav-links a:hover {
+    color: var(--accent-color);
+    text-shadow: 0 0 10px var(--accent-color);
+}
+
+/* Content Control */
+.content-section {
+    display: none;
+    animation: fadeIn 0.5s ease-in;
+}
+
+.content-section.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* UI Elements */
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.card, .details {
+    background: var(--card-bg);
+    padding: 30px;
+    border-radius: 8px;
+    border-left: 5px solid var(--accent-color);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    line-height: 1.6;
+}
+
+.scp-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #444;
+    margin-bottom: 20px;
+}
+
+.tag {
+    padding: 5px 15px;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.euclid { background: #5e0000; color: #ff9d9d; }
+.safe { background: #1b4d21; color: #a5d6a7; }
+
+.scp-img {
+    width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+    border: 2px solid #444;
+    margin-bottom: 20px;
+    filter: grayscale(0.5);
+    transition: 0.5s;
+}
+
+.scp-img:hover {
+    filter: grayscale(0);
+    border-color: var(--accent-color);
+    transform: scale(1.02);
+}
+
+/* Target both SCP and Home images */
+.scp-img, .home-img {
+    max-width: 100%;
+    height: auto;
+    border: 1px solid #555;
+    margin: 20px 0;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
+    cursor: pointer;
+}
+
+/* The Glow Effect on Hover */
+.scp-img:hover, .home-img:hover {
+    transform: scale(1.02); /* Slightly enlarges the image */
+    border-color: #ff4444; /* Changes border color to match the theme */
+    
+    /* Creates a red atmospheric glow */
+    box-shadow: 0 0 20px 5px rgba(255, 68, 68, 0.6); 
+}
+
+.warningText {
+    color: var(--accent-color);
+    font-weight: bold;
+    text-align: center;
+    animation: blink 2s infinite;
+
+}
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+/* Glow border animation */
+.scp-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 10px;
+    border: 1px solid transparent;
+    transition: 0.3s;
+}
+button {
+    background: var(--accent-color);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 10px 5px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+button:hover {
+    background: #ff5722;
+    animation: button 1s infinite;
+}
+@keyframes button{
+    0% { box-shadow: 0 0 5px rgb(0, 255, 51); }
+    50% { box-shadow: 0 0 20px rgb(0, 255, 13); }
+    100% { box-shadow: 0 0 5px rgb(0, 255, 106); }
+}
+
+.scp-card:hover::after {
+    border-color: rgb(0, 255, 255);
+    box-shadow: 0 0 15px rgb(0, 200, 255);
+}
+.scp-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #444;
+    margin-bottom: 20px;
+
+.details {
+    background: var(--card-bg);
+    padding: 30px;
+    border-radius: 8px;
+    border-left: 5px solid var(--accent-color);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);} 
+}
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+}
+.SCPS-card {
+    background: hsl(var(--card));
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid hsl(var(--border));
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+}
+DIV.details {
+    background: var(--card-bg);
+    padding: 30px;
+    border-radius: 8px;
+    border-left: 5px solid var(--accent-color);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    line-height: 1.6;
+}
+div.details h3 {
+    margin-top: 0;
+    color: var(--accent-color);
+    display: flexbox;
+}
+div.details p {
+    margin-bottom: 0;
+}
+.mobile-nav {
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+} 
+.euclid { background-color: #e67e22; color: white; }
+.safe { background-color: #27ae60; color: white; }
+.tag {
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-weight: bold;
+}
+.search-bar {
+  width: 100%;
+  padding: 0.7rem;
+  margin-top: 1rem;
+  border-radius: 6px;
+  border: 1px solid hsl(var(--border));
+  background: hsl(var(--card));
+  color: white;
+}
+
+@keyframes blink {
+    50% { opacity: 0.3; }
+}
+@media screen {
+    .navbar {
+        padding: 15px;
+    }
+    .nav-links {
+        display: flex;
+    }
+    .mobile-nav {
+        display: flex;
+    }
+    
+}
+@container (max-width: 600px) {
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+    }
+    .nav-links a {
+        padding: 10px 0;
+        width: 100%;
+    }
+    .mobile-nav {
+        display: flex;
+    }
+}
+@-moz-document url-prefix("SCP-") {
+    .scp-img {
+        filter: grayscale(0.5);
+    }
+}
