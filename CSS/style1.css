@@ -1,0 +1,499 @@
+:root {
+    --bg-color: #0d0d0d;
+    --card-bg: #1a1a1a;
+    --accent-color: #f44336;
+    --safe-color: #4caf50;
+    --text-color: #e0e0e0;
+    --nav-bg: rgba(0, 0, 0, 0.9);
+    --border: 0, 0, 0;
+
+    /* NEW animated gradient */
+    --bg-gradient: linear-gradient(-45deg, #0d0d0d, #1a0000, #000000, #330000);
+}
+
+body {
+    background: var(--bg-gradient);
+    background-size: 400% 400%;
+    animation: bgMove 12s ease infinite;
+    color: var(--text-color);
+    font-family: 'Courier New', Courier, monospace;
+    margin: 0;
+    padding-top: 80px;
+    line-height: 1.6;
+}
+@keyframes bgMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: repeating-linear-gradient(
+        to bottom,
+        rgba(255,255,255,0.02),
+        rgba(255,255,255,0.02) 1px,
+        transparent 2px,
+        transparent 4px
+    );
+    pointer-events: none;
+}
+.search-bar {
+  width: 100%;
+  padding: 0.7rem;
+  margin-top: 1rem;
+  border-radius: 6px;
+  border: 1px solid hsl(var(--border));
+  background: hsl(var(--card));
+  color: white;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.scp-card {
+    background: var(--card-bg);
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid hsl(var(--border));
+    cursor: pointer;
+    transition: all 0.4s ease;
+    position: relative;
+}
+
+.scp-card img {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+
+}
+
+.scp-card h2 {
+  padding: 0.5rem 1rem;
+}
+
+.scp-card p {
+  padding: 0 1rem 1rem;
+  font-size: 0.9rem;
+}
+
+.scp-card:hover {
+    transform: translateY(-12px) scale(1.05);
+    box-shadow: 0 0 25px rgba(255,0,0,0.8);
+}
+
+/* Glow border animation */
+.scp-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  transition: 0.3s;
+}
+
+.scp-card:hover::after {
+    border-color: red;
+    animation: borderPulse 1s infinite alternate;
+}
+@keyframes borderPulse {
+    from { box-shadow: 0 0 5px red; }
+    to { box-shadow: 0 0 20px red; }
+}
+
+/* Navbar Style */
+.navbar {
+    position: fixed;
+    top: 0;
+    right: 5px;
+    left: 5px;
+    width: 90%;
+    background: var(--nav-bg);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 50px;
+    border-bottom: 2px solid #333;
+    z-index: 1000;
+    animation: navGlow 3s infinite alternate;
+}
+@keyframes navGlow {
+    from { box-shadow: 0 0 5px rgba(255,0,0,0.2); }
+    to { box-shadow: 0 0 20px rgba(255,0,0,0.6); }
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    letter-spacing: 3px;
+    color: var(--accent-color);
+    animation:flicker 2s infinite alternate;
+}
+@keyframes flicker {
+    0%, 18%, 22%, 25%, 53%, 57%, 100% { opacity: 1; }
+    20%, 24%, 55% { opacity: 0.4; }
+}
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: white;
+    font-size: 0.9rem;
+    transition: 0.3s;
+    text-transform: uppercase;
+}
+
+.nav-links a:hover {
+    color: var(--accent-color);
+    text-shadow: 0 0 10px var(--accent-color);
+}
+
+/* Content Control */
+.content-section {
+    display: none;
+    animation: fadeIn 0.5s ease-in;
+}
+
+.content-section.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* UI Elements */
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.card, .details {
+    background: var(--card-bg);
+    padding: 30px;
+    border-radius: 8px;
+    border-left: 5px solid var(--accent-color);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    line-height: 1.6;
+}
+
+.scp-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #444;
+    margin-bottom: 20px;
+}
+
+.tag {
+    padding: 5px 15px;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.euclid { background: #5e0000; color: #ff9d9d; }
+.safe { background: #1b4d21; color: #a5d6a7; }
+
+.scp-img {
+    width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+    border: 2px solid #444;
+    margin-bottom: 20px;
+    filter: grayscale(0.5);
+    transition: 0.5s;
+}
+
+.scp-img:hover {
+    filter: grayscale(0);
+    border-color: var(--accent-color);
+    transform: scale(1.02);
+}
+
+/* Target both SCP and Home images */
+.scp-img, .home-img {
+    max-width: 100%;
+    height: auto;
+    border: 1px solid #555;
+    margin: 20px 0;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
+    cursor: pointer;
+}
+
+/* The Glow Effect on Hover */
+.scp-img:hover, .home-img:hover {
+    transform: scale(1.05);
+    border-color: #ff4444;
+    box-shadow: 0 0 25px 8px rgba(255, 68, 68, 0.7);
+}
+
+/* WARNING TEXT pulse */
+.warningText {
+    color: var(--accent-color);
+    font-weight: bold;
+    animation: warningBlink 1.5s infinite;
+}
+
+@keyframes warningBlink {
+    0% { opacity: 1; }
+    50% { opacity: 0.4; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+/* Glow border animation */
+.scp-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 10px;
+    border: 1px solid transparent;
+    transition: 0.3s;
+}
+.scp-card {
+   display: flex;
+    flex-direction: column;
+    background: rgba(20,20,20,0.9);
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid #333;
+    margin-bottom: 30px;
+    transition: 0.4s;
+    position: relative;
+}
+button {
+   display: inline-block;
+    margin-top: 10px;
+    padding: 10px 15px;
+    background: transparent;
+    border: 1px solid var(--accent-color);
+    color: var(--accent-color);
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: var(--accent-color);
+    color: black;
+    box-shadow: 0 0 15px var(--accent-color);
+}
+
+
+.scp-card:hover::after {
+    border-color: rgb(86, 65, 65);
+    box-shadow: 0 0 15px rgb(47, 9, 9);
+}
+.scp-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #444;
+    margin-bottom: 20px;
+}
+
+.details {
+    background: var(--card-bg);
+    padding: 30px;
+    border-radius: 8px;
+    border-left: 5px solid var(--accent-color);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5); 
+}
+button ReadSCP, button StopSCP{
+    background: var(--accent-color);
+    color: #2a156b;
+    border: none;
+    padding: 10px 20px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+}
+.SCPS-card {
+    background: hsl(var(--card));
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid hsl(var(--border));
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+}
+DIV.details {
+    background: var(--card-bg);
+    padding: 30px;
+    border-radius: 8px;
+    border-left: 5px solid var(--accent-color);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    line-height: 1.6;
+}
+div.details h3 {
+    margin-top: 0;
+    color: var(--accent-color);
+    display: flexbox;
+}
+div.details p {
+    margin-bottom: 0;
+}
+.mobile-nav {
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+} 
+.euclid { background-color: #e67e22; color: white; }
+.safe { background-color: #27ae60; color: white; }
+.tag {
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+
+@keyframes blink {
+    50% { opacity: 0.3; }
+}
+@media screen {
+    .navbar {
+        padding: 15px;
+    }
+    .nav-links {
+        display: flex;
+    }
+    .mobile-nav {
+        display: flex;
+    }
+    
+}
+@container (max-width: 600px) {
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+    }
+    .nav-links a {
+        padding: 10px 0;
+        width: 100%;
+    }
+    .mobile-nav {
+        display: flex;
+    }
+}
+@-moz-document url-prefix("SCP-") {
+    .scp-img {
+        filter: grayscale(0.5);
+    }
+}
+body.SCP-002 {
+    background: radial-gradient(circle, #50c0d7, #29b2a9);
+    animation: fleshPulse 6s infinite alternate;
+}
+
+@keyframes fleshPulse {
+    from { background-color: #1a0000; }
+    to { background-color: #330000; }
+}
+body.SCP-003 {
+   background: linear-gradient(45deg, #001a1a, #000000, #003333);
+    background-size: 300% 300%;
+    animation: electricFlow 8s infinite;
+}
+
+@keyframes electricFlow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+body.SCP-004 {
+   background: radial-gradient(circle at center, #000000, #050505, #000000);
+    animation: voidBreath 10s infinite;
+}
+
+@keyframes voidBreath {
+    0% { filter: brightness(0.8); }
+    50% { filter: brightness(1.2); }
+    100% { filter: brightness(0.8); }
+}
+body.SCP-005 {
+    background: linear-gradient(120deg, #1a1a00, #000000, #332200);
+    background-size: 300% 300%;
+    animation: goldShift 10s infinite;
+}
+
+@keyframes goldShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+body.SCP-006 {
+    background: linear-gradient(45deg, #6a34d5, #77a07e, #e1ece8);
+    background-size: 300% 300%;
+    animation: waterFlow 12s infinite;
+}
+
+@keyframes waterFlow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+/* HOME TERMINAL STYLE */
+#home {
+    position: relative;
+    padding: 30px;
+}
+
+/* Terminal header */
+.terminal-header {
+    background: rgba(0, 0, 0, 0.85);
+    border: 1px solid #222;
+    padding: 25px;
+    margin-bottom: 30px;
+    border-left: 5px solid var(--accent-color);
+    box-shadow: 0 0 20px rgba(255,0,0,0.2);
+    animation: terminalGlow 3s infinite alternate;
+}
+
+@keyframes terminalGlow {
+    from { box-shadow: 0 0 10px rgba(255,0,0,0.2); }
+    to { box-shadow: 0 0 25px rgba(255,0,0,0.6); }
+}
+
+.terminal-header h1 {
+    margin: 0;
+    font-size: 2rem;
+    letter-spacing: 2px;
+}
+
+/* TYPEWRITER EFFECT */
+.terminal-header h1 {
+    overflow: hidden;
+    white-space: nowrap;
+    border-right: 3px solid var(--accent-color);
+    width: 0;
+    animation: typing 3s steps(20, end) forwards, blinkCursor 0.7s infinite;
+}
+
+@keyframes typing {
+    to { width: 100%; }
+}
+
+@keyframes blinkCursor {
+    50% { border-color: transparent; }
+}
